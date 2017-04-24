@@ -10,7 +10,10 @@
     "discord",
     "bot"
   ],
-  "repository": "https://github.com/craigmc08/discord-corda",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/craigmc08/discord-corda"
+  },
   "author": "craigmc08",
   "license": "ISC",
   "dependencies": {
