@@ -19,7 +19,7 @@ corda.login_discord(key);
 corda.set('watch-commands', true); // Look for changes in commands folder and update commands
 corda.set('recursive-watch', false); // Look for commands in folders in commands folder (and deeper)
 corda.set('command-prefix', '!'); // What to look for at the start of a command
-corda.set('commands-folder', '/path/to/your/commands/folder');
+corda.set('command-folder', '/path/to/your/commands/folder');
 
 corda.on('ready', () => {console.log('Bot ready!');});
 ```

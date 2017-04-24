@@ -28,6 +28,7 @@ client.on('message', (message) => {
           } else if (/^".*"$/.test(arg)) {
             args[j] = args[j].slice(1).slice(0, -1)
           }
+          args[j] = arg.trim()
         }
 
         // Run command
