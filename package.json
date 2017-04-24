@@ -1,5 +1,5 @@
 {
-  "name": "corda",
+  "name": "discord-corda",
   "version": "1.0.0",
   "description": "Flexible, modular Discord bot framework",
   "main": "src/index.js",
