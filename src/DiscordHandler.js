@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 const {Client} = require('discord.js')
-const CommandParser = require('../CommandParser')
+const CommandParser = require('./CommandParser')
 let client = new Client()
 
 module.exports.command_prefix = '!'
