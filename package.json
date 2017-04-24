@@ -1,6 +1,6 @@
 {
   "name": "discord-corda",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Flexible, modular Discord bot framework",
   "main": "src/index.js",
   "scripts": {
