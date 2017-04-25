@@ -3,6 +3,8 @@
 const decache = require('decache')
 const file = require('file')
 const color = require('colors')
+const fs = require('fs')
+const path = require('path')
 
 module.exports.commands = []
 
@@ -13,9 +15,20 @@ module.exports.commands = []
  */
 function parseCommand(filename) {
   if (/^.*\.js$/.test(filename)) {
+    // Check to make sure it wants to be parsed as a command
+    const data = fs.readFileSync(filename, 'utf8')
+    if (data.startsWith('/* !COMMAND */')) {
+      return {
+        success: false,
+        reason: '!command'
+      }
+    }
     decache(filename)
-    const command = require(filename)
-    return command
+    const Command = require(filename)
+    return {
+      success: true,
+      command: Command
+    }
   } else {
     throw new Error('File should be a .js file')
   }
@@ -46,8 +59,14 @@ function updateCommand(filename, evt, i) {
   if (evt === 'remove') {
     module.exports.commands.splice(i, 1)
   } else {
-    const command = parseCommand(filename)
-    module.exports.commands[i] = generateCommandObject(command, filename)
+    const data = parseCommand(filename)
+    if (data.success) {
+      module.exports.commands[i] = generateCommandObject(data.command, filename)
+    } else if (data.reason === '!command') {
+      console.log('Found non-command file in commands folder, moving on')
+    } else {
+      console.log('Failed:'.red.bold, ' Parsing Command file, reason', data.msg)
+    }
   }
 }
 /**
@@ -55,8 +74,12 @@ function updateCommand(filename, evt, i) {
  * @param {string} filename
  */
 function createCommand(filename) {
-  const command = parseCommand(filename)
-  module.exports.commands.push(generateCommandObject(command, filename))
+  const data = parseCommand(filename)
+  if (data.success) {
+    module.exports.commands.push(generateCommandObject(data.command, filename))
+  } else {
+    console.log('Failed:'.red.bold, ' Parsing Command file, reason:', data.reason)
+  }
 }
 
 /**
@@ -92,6 +115,8 @@ module.exports.change = (evt, filename) => {
  */
 module.exports.reset = (folder) => {
   module.exports.commands = []
+  // Create help command
+  createCommand(path.join(__dirname, '/HelpCommand.js'))
   file.walk(folder, (err, dirPath, dir, files) => {
     if (err) {
       throw err

@@ -1,15 +1,19 @@
 /* eslint-disable */
 
 const {Command} = require('../../src/index.js') // This would be require('corda')
+const lib = require('./lib')
 
 /** Basic Command Example */
 module.exports = class PingCommand extends Command {
   constructor() {
-    super()
+    super({
+      name: "Ping",
+      description: "Ping the bot"
+    })
   }
 
   async run(message, channel, args) {
-    message.reply('Pong!')
+    lib.pong(message, channel, args)
   }
 
   static get prefix() {

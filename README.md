@@ -42,3 +42,6 @@ Start your server
 node index.js
 ```
 After a couple of seconds, you should see 'Bot Ready!' appear in your console. Head to a Discord server with your bot in it, and try out your new command with '!test'. You should see it respond however you told it to. Now you can do whatever you please from here.
+
+### More
+There's a few other features not covered here. Have a look through the example (specifically the commands) for some stuff not shown.

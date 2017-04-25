@@ -5,7 +5,10 @@ const {Command} = require('../../src/index.js') // This would be require('corda'
 /** Command with aliases */
 module.exports = class GreetingCommand extends Command {
   constructor() {
-    super()
+    super({
+      name: "Greetings",
+      description: "Say hello or goodbye to the bot"
+    })
   }
 
   async run(message, channel, args) {
@@ -27,9 +30,6 @@ module.exports = class GreetingCommand extends Command {
   }
   static get aliases() {
     return [
-      {
-        prefix: 'g'
-      },
       {
         prefix: 'hello',
         run: new this().commandHello
