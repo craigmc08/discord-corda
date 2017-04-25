@@ -15,4 +15,18 @@ module.exports = class Command {
   async run(message, channel, args) {
     // NOTHING
   }
+
+  /**
+   * @type {CommandAlias[]}
+   */
+  static get aliases() {
+    return []
+  }
 }
+
+/**
+ * @typedef CommandAlias
+ * @type {object}
+ * @property {string} prefix - The alias beginning
+ * @property {function} [run] - The (optional) function to run
+ */

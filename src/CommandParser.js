@@ -32,6 +32,7 @@ function generateCommandObject(Command, filename) {
     filename: filename,
     details: {
       prefix: Command.prefix,
+      aliases: Command.aliases,
     },
   }
 }
@@ -106,13 +107,14 @@ module.exports.reset = (folder) => {
 
 /**
  * @typedef {object} CommandObject
- * @param {function} command - The command constructor
- * @param {string} filename - The original file for the command
- * @param {CommandDetails} details
+ * @property {function} command - The command constructor
+ * @property {string} filename - The original file for the command
+ * @property {CommandDetails} details
  */
 /**
  * @typedef {object} CommandDetails
- * @param {string} prefix - The prefix for the command
- * @param {CommandArgs[]} args - Array of expected arguments to command
+ * @property {string} prefix - The prefix for the command
+ * @property {CommandAlias[]} aliases - List of aliases for this command
+ * @property {CommandArgs[]} args - Array of expected arguments to command
  *    NOTE: args is not implemented anywhere yet
  */
